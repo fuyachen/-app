@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30rem 10rem 30rem;
+  border-bottom: 2rem solid rgb(233, 233, 233);
+}
+
+.imgBox {
+  width: 260rem;
+}
+
+img {
+  width: 100%;
+}
+
+.contentBox {
+  margin-left: 25rem;
+}
+
+.title {
+  margin: 0;
+  margin-bottom: 20rem;
+  font-size: 28rem;
+  /* font-weight: normal; */
+  color: rgb(69, 69, 69);
+}
+
+.desc {
+  width: 95%;
+  font-size: 10rem;
+  color: rgb(91, 91, 91);
+}
+
+.priceAndCounter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rem;
+}
+
+.price {
+  font-size: 28rem;
+  font-weight: bold;
+}
+
+.price::before {
+  content: "￥";
+  font-size: 10rem;
+  font-weight: normal;
+}
