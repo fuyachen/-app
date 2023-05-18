@@ -6,13 +6,7 @@ const Meals = (props) => {
   return (
     <div className={styles.container}>
       {props.mealsData.map((e) => (
-        <MealItem
-          key={e.id}
-          title={e.title}
-          desc={e.desc}
-          price={e.price}
-          img={e.img}
-        />
+        <MealItem key={e.id} mealItem={e} />
       ))}
     </div>
   )
