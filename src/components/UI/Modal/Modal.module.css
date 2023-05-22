@@ -1,0 +1,46 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  width: 80%;
+  height: 250rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(70, 70, 70);
+  background-color: #fff;
+  border-radius: 20rem;
+}
+
+.content {
+  font-size: 35rem;
+}
+
+.modalBackdrop {
+  z-index: 9999;
+}
+
+.choice {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.cancle,
+.confirm {
+  width: 140rem;
+  height: 50rem;
+  border-radius: 50rem;
+  font-size: 25rem;
+}
+
+.cancle {
+  background-color: #fff;
+  border: 1rem solid rgb(70, 70, 70);
+}
+
+.confirm {
+  background-color: #f8bc00;
+}
