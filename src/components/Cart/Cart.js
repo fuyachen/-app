@@ -1,12 +1,18 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import styles from "./Cart.module.css"
 import iconImg from "../../asset/bag.png"
 import CartContext from "../store/CartContext"
+import CartDetail from "./CartDetail/CartDetail"
 
 const Cart = () => {
   const ctx = useContext(CartContext)
+  const [isShow, setIsShow] = useState(false)
+  const toggleCartDetail = () => {
+    setIsShow((prevState) => !prevState)
+  }
   return (
-    <div className={styles.cart}>
+    <div className={styles.cart} onClick={toggleCartDetail}>
+      {ctx.totalAmount !== 0 && isShow && <CartDetail></CartDetail>}
       <div className={styles.icon}>
         <img src={iconImg} alt="购物车" />
         {ctx.sum !== 0 && (

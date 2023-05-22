@@ -3,7 +3,6 @@ import { useState, useContext } from "react"
 import CartContext from "./components/store/CartContext"
 import SearchBar from "./components/SearchBar/SearchBar"
 import Cart from "./components/Cart/Cart"
-import Backdrop from "./components/UI/Backdrop/Backdrop"
 
 // 模拟一组食物数据
 const MEALS_DATA = [
@@ -112,7 +111,6 @@ const App = () => {
       <SearchBar onfilter={filterHandler}></SearchBar>
       <Meals mealsData={mealsData} />
       <Cart />
-      <Backdrop />
     </CartContext.Provider>
   )
 }

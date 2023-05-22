@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  justify-content: center;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 30rem 10rem 30rem;
   border-bottom: 2rem solid rgb(233, 233, 233);
@@ -15,6 +15,7 @@ img {
 }
 
 .contentBox {
+  flex: auto;
   margin-left: 25rem;
 }
 
