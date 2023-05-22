@@ -1,0 +1,66 @@
+.cart {
+  position: fixed;
+  bottom: 20rem;
+  left: 25rem;
+  width: 700rem;
+  height: 80rem;
+  background-color: #3a3a3a;
+  border-radius: 75rem;
+  z-index: 999;
+}
+
+.icon {
+  position: absolute;
+  width: 80rem;
+  bottom: -10rem;
+}
+
+.icon img {
+  width: 100%;
+}
+
+.icon .amount {
+  position: absolute;
+  top: 0;
+  right: -15rem;
+  width: 35rem;
+  height: 35rem;
+  color: #fff;
+  font-size: 20rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 35rem;
+  background-color: #d00c0c;
+  border-radius: 25rem;
+}
+
+.none,
+.sum {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin-left: 120rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 36rem;
+}
+
+.sum::before {
+  content: "￥";
+  font-size: 22rem;
+}
+
+.none {
+  color: #adadad;
+}
+
+.checkout {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  font-size: 32rem;
+  background-color: #f8bc00;
+  border-radius: 75rem;
+}

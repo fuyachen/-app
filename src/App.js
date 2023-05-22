@@ -2,6 +2,7 @@ import Meals from "./components/Meals/Meals"
 import { useState, useContext } from "react"
 import CartContext from "./components/store/CartContext"
 import SearchBar from "./components/SearchBar/SearchBar"
+import Cart from "./components/Cart/Cart"
 
 // 模拟一组食物数据
 const MEALS_DATA = [
@@ -109,6 +110,7 @@ const App = () => {
     <CartContext.Provider value={{ ...CartData, addItem, subItem }}>
       <SearchBar onfilter={filterHandler}></SearchBar>
       <Meals mealsData={mealsData} />
+      <Cart />
     </CartContext.Provider>
   )
 }
