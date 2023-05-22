@@ -10,7 +10,7 @@ const Counter = (props) => {
   const sub = () => {
     ctx.subItem(props.mealItem)
   }
-  const add = () => {
+  const add = (e) => {
     ctx.addItem(props.mealItem)
   }
   return (

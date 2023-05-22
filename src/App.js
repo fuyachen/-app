@@ -1,6 +1,7 @@
 import Meals from "./components/Meals/Meals"
 import { useState, useContext } from "react"
 import CartContext from "./components/store/CartContext"
+import SearchBar from "./components/SearchBar/SearchBar"
 
 // 模拟一组食物数据
 const MEALS_DATA = [
@@ -96,12 +97,19 @@ const App = () => {
     setCartData(newCart)
   }
 
+  // 根据搜索框中的输入过滤列表数据
+  const filterHandler = (userInput) => {
+    const filterList = MEALS_DATA.filter(
+      (item) => item.title.indexOf(userInput) !== -1
+    )
+    setMealsData(filterList)
+  }
+
   return (
-    <div style={{ width: "750rem" }}>
-      <CartContext.Provider value={{ ...CartData, addItem, subItem }}>
-        <Meals mealsData={mealsData} />
-      </CartContext.Provider>
-    </div>
+    <CartContext.Provider value={{ ...CartData, addItem, subItem }}>
+      <SearchBar onfilter={filterHandler}></SearchBar>
+      <Meals mealsData={mealsData} />
+    </CartContext.Provider>
   )
 }
 

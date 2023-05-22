@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 95%;
+  height: 70rem;
+  margin: 25rem auto;
+  margin-bottom: 10rem;
+  padding: 10rem;
+  border-radius: 30rem;
+  background-color: #f2f2f2;
+  z-index: 999;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60rem;
+  height: 100%;
+  font-size: 30rem;
+  color: #bfbfbf;
+}
+
+input {
+  outline: none;
+  border: none;
+  background-color: #f2f2f2;
+  font-size: 30rem;
+}
+
+input::placeholder {
+  color: #a0a0a0;
+}
