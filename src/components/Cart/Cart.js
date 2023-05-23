@@ -3,6 +3,7 @@ import styles from "./Cart.module.css"
 import iconImg from "../../asset/bag.png"
 import CartContext from "../store/CartContext"
 import CartDetail from "./CartDetail/CartDetail"
+import Checkout from "./Checkout/Checkout"
 
 const Cart = () => {
   const ctx = useContext(CartContext)
@@ -10,8 +11,17 @@ const Cart = () => {
   const toggleCartDetail = () => {
     setIsShow((prevState) => !prevState)
   }
+  const [showCheckout, setShowCheckout] = useState(false)
+  const checkout = () => {
+    setShowCheckout(true)
+  }
+  const hideCheckout = () => {
+    setShowCheckout(false)
+  }
   return (
     <div className={styles.cart} onClick={toggleCartDetail}>
+      {/* 结算页面 */}
+      {showCheckout && <Checkout onHide={hideCheckout} />}
       {ctx.totalAmount !== 0 && isShow && <CartDetail></CartDetail>}
       <div className={styles.icon}>
         <img src={iconImg} alt="购物车" />
@@ -24,7 +34,9 @@ const Cart = () => {
       ) : (
         <div className={styles.none}>未选购商品</div>
       )}
-      <button className={styles.checkout}>去结算</button>
+      <button className={styles.checkout} onClick={checkout}>
+        去结算
+      </button>
     </div>
   )
 }

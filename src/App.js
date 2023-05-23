@@ -3,7 +3,6 @@ import { useState, useContext } from "react"
 import CartContext from "./components/store/CartContext"
 import SearchBar from "./components/SearchBar/SearchBar"
 import Cart from "./components/Cart/Cart"
-import Modal from "./components/UI/Modal/Modal"
 
 // 模拟一组食物数据
 const MEALS_DATA = [
@@ -107,12 +106,23 @@ const App = () => {
     setMealsData(filterList)
   }
 
+  const clearCart = () => {
+    const newMealsData = mealsData.map((item) => {
+      return { ...item, amount: 0 }
+    })
+    setMealsData(newMealsData)
+    const newCart = { ...CartData }
+    newCart.items = []
+    newCart.totalAmount = 0
+    newCart.sum = 0
+    setCartData(newCart)
+  }
+
   return (
-    <CartContext.Provider value={{ ...CartData, addItem, subItem }}>
+    <CartContext.Provider value={{ ...CartData, addItem, subItem, clearCart }}>
       <SearchBar onfilter={filterHandler}></SearchBar>
       <Meals mealsData={mealsData} />
       <Cart />
-      <Modal />
     </CartContext.Provider>
   )
 }
