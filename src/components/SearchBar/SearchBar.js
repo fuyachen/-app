@@ -1,13 +1,25 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styles from "./SearchBar.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
 const SearchBar = (props) => {
+  const [keyword, setKeyword] = useState("")
+
   const inputChangeHandler = (e) => {
-    const userInput = e.target.value.trim()
-    props.onfilter(userInput)
+    setKeyword(e.target.value.trim())
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("effect 执行了")
+      props.onfilter(keyword)
+    }, 500)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [keyword])
 
   return (
     <div className={styles.container}>
@@ -18,6 +30,7 @@ const SearchBar = (props) => {
         type="text"
         placeholder="请输入关键字"
         onChange={inputChangeHandler}
+        value={keyword}
       />
     </div>
   )
