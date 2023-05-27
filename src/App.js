@@ -106,6 +106,7 @@ const App = () => {
     setMealsData(filterList)
   }
 
+  // 清空购物车
   const clearCart = () => {
     const newMealsData = mealsData.map((item) => {
       return { ...item, amount: 0 }
