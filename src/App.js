@@ -1,5 +1,5 @@
 import Meals from "./components/Meals/Meals"
-import { useState, useContext } from "react"
+import { useState, useReducer } from "react"
 import CartContext from "./components/store/CartContext"
 import SearchBar from "./components/SearchBar/SearchBar"
 import Cart from "./components/Cart/Cart"
@@ -64,39 +64,53 @@ const MEALS_DATA = [
   },
 ]
 
+// reducer
+const reducer = (CartData, action) => {
+  const { type, mealItem } = action
+  const newCart = { ...CartData }
+  switch (type) {
+    case "ADD_ITEM":
+      // 检查购物车中是否已经有该餐品
+      const index = newCart.items.indexOf(mealItem)
+      // 无，添加数据到购物车列表
+      if (index === -1) {
+        newCart.items.push(mealItem)
+      }
+      // 有，更改商品数量
+      mealItem.amount += 1
+      newCart.totalAmount += 1
+      newCart.sum += mealItem.price
+      return newCart
+
+    case "SUB_ITEM":
+      mealItem.amount -= 1
+      // 商品数量为1，从购物车中移除商品
+      if (mealItem.amount === 0) {
+        newCart.items.splice(newCart.items.indexOf(mealItem), 1)
+      }
+      newCart.totalAmount -= 1
+      newCart.sum -= mealItem.price
+      return newCart
+
+    case "CLEAR_CART":
+      newCart.items.forEach((item) => delete item.amount)
+      newCart.items = []
+      newCart.totalAmount = 0
+      newCart.sum = 0
+      return newCart
+
+    default:
+      return CartData
+  }
+}
+
 const App = () => {
   const [mealsData, setMealsData] = useState(MEALS_DATA)
-  // 将context中的数据设为双向绑定数据
-  const cartCtx = useContext(CartContext)
-  const [CartData, setCartData] = useState(cartCtx)
-  // 增加商品数量
-  const addItem = (mealItem) => {
-    const newCart = { ...CartData }
-    // 检查购物车中是否已经有该餐品
-    const index = newCart.items.indexOf(mealItem)
-    // 无，添加数据到购物车列表
-    if (index === -1) {
-      newCart.items.push(mealItem)
-    }
-    // 有，更改商品数量
-    mealItem.amount += 1
-    newCart.totalAmount += 1
-    newCart.sum += mealItem.price
-    setCartData(newCart)
-  }
-
-  // 减少商品数量
-  const subItem = (mealItem) => {
-    const newCart = { ...CartData }
-    mealItem.amount -= 1
-    // 商品数量为1，从购物车中移除商品
-    if (mealItem.amount === 0) {
-      newCart.items.splice(newCart.items.indexOf(mealItem), 1)
-    }
-    newCart.totalAmount -= 1
-    newCart.sum -= mealItem.price
-    setCartData(newCart)
-  }
+  const [CartData, cartDispatch] = useReducer(reducer, {
+    items: [],
+    totalAmount: 0,
+    sum: 0,
+  })
 
   // 根据搜索框中的输入过滤列表数据
   const filterHandler = (userInput) => {
@@ -106,21 +120,8 @@ const App = () => {
     setMealsData(filterList)
   }
 
-  // 清空购物车
-  const clearCart = () => {
-    const newMealsData = mealsData.map((item) => {
-      return { ...item, amount: 0 }
-    })
-    setMealsData(newMealsData)
-    const newCart = { ...CartData }
-    newCart.items = []
-    newCart.totalAmount = 0
-    newCart.sum = 0
-    setCartData(newCart)
-  }
-
   return (
-    <CartContext.Provider value={{ ...CartData, addItem, subItem, clearCart }}>
+    <CartContext.Provider value={{ ...CartData, cartDispatch }}>
       <SearchBar onfilter={filterHandler}></SearchBar>
       <Meals mealsData={mealsData} />
       <Cart />

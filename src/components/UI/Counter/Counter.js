@@ -8,10 +8,10 @@ const Counter = (props) => {
   const ctx = useContext(CartContext)
 
   const sub = () => {
-    ctx.subItem(props.mealItem)
+    ctx.cartDispatch({ type: "SUB_ITEM", mealItem: props.mealItem })
   }
-  const add = (e) => {
-    ctx.addItem(props.mealItem)
+  const add = () => {
+    ctx.cartDispatch({ type: "ADD_ITEM", mealItem: props.mealItem })
   }
   return (
     <div className={styles.container}>

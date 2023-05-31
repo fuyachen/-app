@@ -22,7 +22,7 @@ const CartDetail = () => {
   }
 
   const confirmHandler = () => {
-    ctx.clearCart()
+    ctx.cartDispatch({ type: "CLEAR_CART" })
     setShowModal(false)
   }
   return (
